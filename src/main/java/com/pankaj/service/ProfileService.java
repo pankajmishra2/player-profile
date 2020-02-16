@@ -2,10 +2,13 @@ package com.pankaj.service;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 
 import com.pankaj.model.Career;
 import com.pankaj.model.Player;
@@ -13,6 +16,9 @@ import com.pankaj.model.Profile;
 
 @Service
 public class ProfileService {
+	
+	@Autowired
+	RestTemplate restTemplate;
 	
 	@Autowired
 	TestCareerService testCareerService;
@@ -34,8 +40,8 @@ public class ProfileService {
 	
 	public Profile getProfileById(int id) {
 		Player player = getPlayer(id);
-		Career testCareer = testCareerService.getTestCareer(id);
-		Career oneDayCareer = oneDayCareerService.getOneDayCareer(id);
+		Career testCareer = restTemplate.getForObject("http://test-career/"+id, Career.class);
+		Career oneDayCareer = restTemplate.getForObject("http://one-day-career/"+id, Career.class);
 		return new Profile(player, testCareer, oneDayCareer);
 	}
 
