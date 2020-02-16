@@ -12,7 +12,7 @@ import com.pankaj.model.Career;
 public class TestCareerService {
 	
 	List<Career> careers = new ArrayList<Career>(Arrays.asList(
-			new Career(1, 200, 15921, 46),
+			new Career(1, 200, 15921, 45),
 			new Career(2, 113, 7212, 32),
 			new Career(3, 84, 7202, 0),
 			new Career(4, 168, 13378, 5),
